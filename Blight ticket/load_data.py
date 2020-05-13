@@ -4,10 +4,10 @@ from sklearn.preprocessing import LabelEncoder # pylint: disable=import-error
 
 
 def load_data():
-    train = pd.read_csv('data/train.csv', encoding = "ISO-8859-1")
-    test = pd.read_csv('data/test.csv')
-    addresses = pd.read_csv('data/addresses.csv')
-    latlons = pd.read_csv('data/latlons.csv')
+    train = pd.read_csv('blight_data/train.csv', encoding = "ISO-8859-1")
+    test = pd.read_csv('blight_data/test.csv')
+    addresses = pd.read_csv('blight_data/addresses.csv')
+    latlons = pd.read_csv('blight_data/latlons.csv')
 
     # pre-processing
 
@@ -42,7 +42,10 @@ def load_data():
     train['lon'] = train['lon'].fillna(train['lon'].mean())
     test['lat'] = test['lat'].fillna(test['lat'].mean())
     test['lon'] = test['lon'].fillna(test['lon'].mean())
-
+    train_columns = list(train.columns.values)
+    train_columns.remove('compliance')
+    test = test[train_columns]
+    
 
 
     return train
